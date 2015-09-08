@@ -1,0 +1,119 @@
+[blit.c:40]: (style) Statements following return, break, continue, goto or throw will never be executed.
+[emu.c:136]: (warning) sprintf format string has 0 parameters but 1 are given.
+[emu.c:138]: (warning) sprintf format string has 0 parameters but 1 are given.
+[emu.c:139]: (warning) sprintf format string has 0 parameters but 1 are given.
+[emu.c:140]: (warning) sprintf format string has 0 parameters but 1 are given.
+[emu.c:141]: (warning) sprintf format string has 0 parameters but 1 are given.
+[emu.c:78]: (style) The scope of the variable 'keyc2' can be reduced.
+[emu.c:221]: (style) The scope of the variable 'p' can be reduced.
+[emu.c:341]: (style) The scope of the variable 'set_PsndOut' can be reduced.
+[emu.c:524]: (style) The scope of the variable 'lim_time' can be reduced.
+[emu.c:565]: (style) The scope of the variable 'noticeMsgSum' can be reduced.
+[emu.c:581]: (style) The scope of the variable 'scalex' can be reduced.
+[emu.c:345]: (style) Variable 'set_PsndOut' is assigned a value that is never used.
+[emu.c:369]: (style) Variable 'keys' is not assigned a value.
+[emu.c:408]: (style) Unused variable: joy
+[emu.c:520]: (style) Variable 'PsndRate_old' is assigned a value that is never used.
+[emu.c:520]: (style) Variable 'PicoOpt_old' is assigned a value that is never used.
+[emu.c:520]: (style) Variable 'pal_old' is assigned a value that is never used.
+[emu.c:524]: (style) Variable 'vsync_offset' is not assigned a value.
+[emu.c:588]: (style) Variable 'scalex' is assigned a value that is never used.
+[emu.c:91]: (style) Expression '(X & 0x30000) == 0x1' is always false.
+[emu.c:461]: (warning) Assignment of function parameter has no effect outside the function.
+[emu.c:373]: (error) Uninitialized variable: keys
+[emu.c:622]: (error) Uninitialized variable: vsync_offset
+[gui.c:496]: (style) The scope of the variable 'ent' can be reduced.
+[gui.c:589]: (style) The scope of the variable 'dst' can be reduced.
+[gui.c:395]: (error) Undefined behavior: Variable 'currentdir' is used as parameter and destination in s[n]printf().
+[gui.c:393]: (error) Undefined behavior: Variable 'currentdir' is used as parameter and destination in s[n]printf().
+[menu.c:231]: (style) The scope of the variable 'len' can be reduced.
+[menu.c:283]: (style) The scope of the variable 'inp' can be reduced.
+[menu.c:437]: (style) The scope of the variable 'inp' can be reduced.
+[menu.c:495]: (style) The scope of the variable 'u' can be reduced.
+[menu.c:585]: (style) The scope of the variable 'inp' can be reduced.
+[menu.c:692]: (style) The scope of the variable 'inp' can be reduced.
+[menu.c:798]: (style) The scope of the variable 'inp' can be reduced.
+[menu.c:800]: (style) The scope of the variable 'selected_id' can be reduced.
+[menu.c:920]: (style) The scope of the variable 'inp' can be reduced.
+[menu.c:921]: (style) The scope of the variable 'selected_id' can be reduced.
+[menu.c:985]: (style) The scope of the variable 'names' can be reduced.
+[menu.c:986]: (style) The scope of the variable 'names_short' can be reduced.
+[menu.c:987]: (style) The scope of the variable 'u' can be reduced.
+[menu.c:1130]: (style) The scope of the variable 'inp' can be reduced.
+[menu.c:1131]: (style) The scope of the variable 'selected_id' can be reduced.
+[menu.c:1337]: (style) The scope of the variable 'inp' can be reduced.
+[menu.c:1540]: (style) The scope of the variable 'inp' can be reduced.
+[menu.c:104]: (style) Variable 'wait' is assigned a value that is never used.
+[menu.c:743]: (style) Variable 'bios_names' is assigned a value that is never used.
+[menu.c:1308]: (style) Variable 'y' is assigned a value that is never used.
+[n2DLib.c:51]: (style) The scope of the variable 'c' can be reduced.
+[n2DLib.c:271]: (style) The scope of the variable 'factor' can be reduced.
+[n2DLib.c:308]: (style) The scope of the variable 'factor' can be reduced.
+[n2DLib.c:436]: (style) The scope of the variable 'i' can be reduced.
+[n2DLib.c:436]: (style) The scope of the variable 'j' can be reduced.
+[n2DLib.c:553]: (style) The scope of the variable 'e2' can be reduced.
+[n2DLib.c:582]: (style) The scope of the variable 'cur_arg' can be reduced.
+[n2DLib.c:692]: (style) The scope of the variable 'i' can be reduced.
+[n2DLib.c:692]: (style) The scope of the variable 'j' can be reduced.
+[n2DLib.c:693]: (style) The scope of the variable 'charSprite' can be reduced.
+[n2DLib.c:728]: (style) The scope of the variable 'num' can be reduced.
+[n2DLib.c:796]: (style) The scope of the variable 'rowmap' can be reduced.
+[sdlemu.c:33]: (style) struct or union member 'Anonymous0::x' is never used.
+[sdlemu.c:34]: (style) struct or union member 'Anonymous0::y' is never used.
+[sdlemu.c:36]: (style) Variable 'vm' is assigned a value that is never used.
+[emu.c:255]: (style) The function 'EmuScan8' is never used.
+[menu.c:471]: (style) The function 'action_binds' is never used.
+[n2DLib.c:357]: (style) The function 'clearBuffer' is never used.
+[n2DLib.c:350]: (style) The function 'clearBufferW' is never used.
+[n2DLib.c:251]: (style) The function 'cube' is never used.
+[n2DLib.c:724]: (style) The function 'drawDecimal' is never used.
+[n2DLib.c:390]: (style) The function 'drawHLine' is never used.
+[n2DLib.c:572]: (style) The function 'drawPolygon' is never used.
+[n2DLib.c:445]: (style) The function 'drawSprite' is never used.
+[n2DLib.c:459]: (style) The function 'drawSpritePart' is never used.
+[n2DLib.c:497]: (style) The function 'drawSpriteRotated' is never used.
+[n2DLib.c:476]: (style) The function 'drawSpriteScaled' is never used.
+[n2DLib.c:748]: (style) The function 'drawStringF' is never used.
+[n2DLib.c:412]: (style) The function 'drawVLine' is never used.
+[menu.c:200]: (style) The function 'draw_dirlist' is never used.
+[emu.c:57]: (style) The function 'emu_getMainDir' is never used.
+[emu.c:329]: (style) The function 'emu_msg_tray_open' is never used.
+[emu.c:52]: (style) The function 'emu_noticeMsgUpdated' is never used.
+[emu.c:187]: (style) The function 'emu_setDefaultConfig' is never used.
+[menu.c:185]: (style) The function 'file2color' is never used.
+[n2DLib.c:601]: (style) The function 'fillCircle' is never used.
+[n2DLib.c:612]: (style) The function 'fillEllipse' is never used.
+[n2DLib.c:256]: (style) The function 'fixcube' is never used.
+[n2DLib.c:246]: (style) The function 'fixsq' is never used.
+[n2DLib.c:794]: (style) The function 'get_key_pressed' is never used.
+[n2DLib.c:268]: (style) The function 'interpolatePathFixed' is never used.
+[n2DLib.c:305]: (style) The function 'interpolatePathFloat' is never used.
+[n2DLib.c:839]: (style) The function 'isKey' is never used.
+[log_io.c:34]: (style) The function 'log_io' is never used.
+[log_io.c:57]: (style) The function 'log_io_clear' is never used.
+[log_io.c:67]: (style) The function 'log_io_dump' is never used.
+[sdlemu.c:352]: (style) The function 'lprintf' is never used.
+[menu.c:741]: (style) The function 'menu_cdopt_cust_draw' is never used.
+[menu.c:1537]: (style) The function 'menu_loop_tray' is never used.
+[menu.c:891]: (style) The function 'menu_opt2_cust_draw' is never used.
+[menu.c:1006]: (style) The function 'menu_opt_cust_draw' is never used.
+[menu.c:174]: (style) The function 'menu_romload_end' is never used.
+[menu.c:157]: (style) The function 'menu_romload_prepare' is never used.
+[n2DLib.c:760]: (style) The function 'numberWidth' is never used.
+[main.c:28]: (style) The function 'parse_cmd_line' is never used.
+[menu.c:204]: (style) The function 'scandir_cmp' is never used.
+[menu.c:214]: (style) The function 'scandir_filter' is never used.
+[sdlemu.c:106]: (style) The function 'sdl_pd_clone_buffer2' is never used.
+[n2DLib.c:384]: (style) The function 'setPixelRGB' is never used.
+[menu.c:1075]: (style) The function 'sndrate_prevnext' is never used.
+[n2DLib.c:241]: (style) The function 'sq' is never used.
+[n2DLib.c:780]: (style) The function 'stringWidth' is never used.
+[n2DLib.c:106]: (style) The function 'timer_init' is never used.
+[n2DLib.c:162]: (style) The function 'timer_load' is never used.
+[n2DLib.c:176]: (style) The function 'timer_read' is never used.
+[n2DLib.c:138]: (style) The function 'timer_restore' is never used.
+[emu.c:459]: (style) The function 'updateSound' is never used.
+[blit.c:5]: (style) The function 'vidConvCpyRGB32' is never used.
+[blit.c:31]: (style) The function 'vidConvCpyRGB32hi' is never used.
+[blit.c:18]: (style) The function 'vidConvCpyRGB32sh' is never used.
+(information) Cppcheck cannot find all the include files (use --check-config for details)
