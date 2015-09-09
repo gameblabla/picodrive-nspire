@@ -217,97 +217,7 @@ int emu_ReloadRom(void)
 
 	get_ext(romFileName, ext);
 
-	// detect wrong extensions
-	if(!strcmp(ext, ".srm") || !strcmp(ext, "s.gz") || !strcmp(ext, ".mds")) { // s.gz ~ .mds.gz
-		sprintf(menuErrorMsg, "Not a ROM selected.");
-		engineState = PGS_Quit;
-		return 0;
-	}
-
-	PicoPatchUnload();
-
-	// check for movie file
-	if(movie_data) {
-		free(movie_data);
-		movie_data = 0;
-	}
-	if(!strcmp(ext, ".gmv")) {
-		// check for both gmv and rom
-		int dummy;
-		FILE *movie_file = fopen(romFileName, "rb");
-		if(!movie_file) {
-			sprintf(menuErrorMsg, "Failed to open movie.");
-			return 0;
-		}
-		fseek(movie_file, 0, SEEK_END);
-		movie_size = ftell(movie_file);
-		fseek(movie_file, 0, SEEK_SET);
-		if(movie_size < 64+3) {
-			sprintf(menuErrorMsg, "Invalid GMV file.");
-			fclose(movie_file);
-			return 0;
-		}
-		movie_data = malloc(movie_size);
-		if(movie_data == NULL) {
-			sprintf(menuErrorMsg, "low memory.");
-			fclose(movie_file);
-			return 0;
-		}
-		fread(movie_data, 1, movie_size, movie_file);
-		fclose(movie_file);
-		if (strncmp((char *)movie_data, "Gens Movie TEST", 15) != 0) {
-			sprintf(menuErrorMsg, "Invalid GMV file.");
-			return 0;
-		}
-		dummy = try_rfn_cut() || try_rfn_cut();
-		if (!dummy) {
-			sprintf(menuErrorMsg, "Could't find a ROM for movie.");
-			return 0;
-		}
-		get_ext(romFileName, ext);
-	}
-	else if (!strcmp(ext, ".pat")) {
-		int dummy;
-		PicoPatchLoad(romFileName);
-		dummy = try_rfn_cut() || try_rfn_cut();
-		if (!dummy) {
-			sprintf(menuErrorMsg, "Could't find a ROM to patch.");
-			return 0;
-		}
-		get_ext(romFileName, ext);
-	}
-
-	/*if ((PicoMCD & 1) && Pico_mcd != NULL)
-		Stop_CD();
-*/
-	// check for MegaCD image
-	/*cd_state = emu_cdCheck(&cd_region);*/
-	/*if (cd_state > 0)
-	{
-		// valid CD image, check for BIOS..
-
-		// we need to have config loaded at this point
-		ret = emu_ReadConfig(1, 1);
-		if (!ret) emu_ReadConfig(0, 1);
-		cfg_loaded = 1;
-
-		if (PicoRegionOverride) {
-			cd_region = PicoRegionOverride;
-			lprintf("overrided region to %s\n", cd_region != 4 ? (cd_region == 8 ? "EU" : "JAP") : "USA");
-		}
-		if (!emu_findBios(cd_region, &used_rom_name)) {
-			// bios_help() ?
-			return 0;
-		}
-
-		PicoMCD |= 1;
-		get_ext(used_rom_name, ext);
-	}
-	else
-	{
-		if (PicoMCD & 1) Stop_CD();
-		PicoMCD &= ~1;
-	}*/
+	/*PicoPatchUnload();*/
 
 	rom = pm_open(used_rom_name);
 	if(!rom) {
@@ -333,14 +243,14 @@ int emu_ReloadRom(void)
 	pm_close(rom);
 
 	// detect wrong files (Pico crashes on very small files), also see if ROM EP is good
-	if(rom_size <= 0x200 || strncmp((char *)rom_data, "Pico", 4) == 0 ||
+	/*if(rom_size <= 0x200 || strncmp((char *)rom_data, "Pico", 4) == 0 ||
 	  ((*(unsigned char *)(rom_data+4)<<16)|(*(unsigned short *)(rom_data+6))) >= (int)rom_size) {
 		if (rom_data) free(rom_data);
 		rom_data = 0;
 		sprintf(menuErrorMsg, "Not a ROM selected.");
 		menu_romload_end();
 		return 0;
-	}
+	}*/
 
 	// load config for this ROM (do this before insert to get correct region)
 	if (!cfg_loaded) {
@@ -383,32 +293,15 @@ int emu_ReloadRom(void)
 	}
 
 	// additional movie stuff
-	if (movie_data) {
-		if(movie_data[0x14] == '6')
-		     PicoOpt |=  0x20; // 6 button pad
-		else PicoOpt &= ~0x20;
-		PicoOpt |= 0x10040; // accurate timing, no VDP fifo timing
-		if(movie_data[0xF] >= 'A') {
-			if(movie_data[0x16] & 0x80) {
-				PicoRegionOverride = 8;
-			} else {
-				PicoRegionOverride = 4;
-			}
-			PicoReset(0);
-			// TODO: bits 6 & 5
-		}
-		movie_data[0x18+30] = 0;
-		sprintf(noticeMsg, "MOVIE: %s", (char *) &movie_data[0x18]);
-	}
-	else
+	PicoOpt &= ~0x10000;
+	if(Pico.m.pal) 
 	{
-		PicoOpt &= ~0x10000;
-		if(Pico.m.pal) {
-			strcpy(noticeMsg, "PAL SYSTEM / 50 FPS");
-		} else {
-			strcpy(noticeMsg, "NTSC SYSTEM / 60 FPS");
-		}
+		strcpy(noticeMsg, "PAL SYSTEM / 50 FPS");
+	} 
+	else {
+		strcpy(noticeMsg, "NTSC SYSTEM / 60 FPS");
 	}
+
 	emu_noticeMsgUpdated();
 
 	// load SRAM for this ROM
