@@ -550,10 +550,9 @@ int emu_WriteConfig(int game)
 
 void emu_textOut8(int x, int y, const char *text)
 {
-	int i,l,len=strlen(text);
+	/*int i,l,len=strlen(text);
 	unsigned char *screen = (unsigned char *)SCREEN_BUFFER + x + y*SCREEN_WIDTH;
 
-	/* always using built-in font */
 	for (i = 0; i < len; i++)
 	{
 		for (l=0;l<8;l++)
@@ -569,12 +568,12 @@ void emu_textOut8(int x, int y, const char *text)
 			if (fd&0x01) screen[l*SCREEN_WIDTH+7]=0xf0;
 		}
 		screen += 8;
-	}
+	}*/
 }
 
 void emu_textOut16(int x, int y, const char *text)
 {
-	int i,l,len=strlen(text);
+	/*int i,l,len=strlen(text);
 	unsigned short *screen = (unsigned short *)SCREEN_BUFFER + x + y*SCREEN_WIDTH;
 
 	for (i = 0; i < len; i++)
@@ -592,7 +591,7 @@ void emu_textOut16(int x, int y, const char *text)
 			if(fd&0x01) screen[l*SCREEN_WIDTH+7]=0xffff;
 		}
 		screen += 8;
-	}
+	}*/
 }
 
 

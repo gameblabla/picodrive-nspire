@@ -65,7 +65,7 @@ static unsigned long wait_for_input(unsigned long interesting)
 	for (i = 0; i < 6 && inp_prev == sdl_joystick_read(1); i++) {
 		if (i == 0) repeats++;
 		if (wait >= 30*1000) sleep(15);
-		else spend_cycles(wait * currentConfig.CPUclock);
+		/*else spend_cycles(wait * currentConfig.CPUclock);*/
 	}
 
 	while ( !((ret = sdl_joystick_read(1)) & interesting) ) {

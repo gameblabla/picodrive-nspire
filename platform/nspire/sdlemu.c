@@ -36,8 +36,6 @@ void sdl_init(void)
 	clearBufferB();
 	updateScreen();
 
-	/*screen = SDL_SetVideoMode(surfacewidth, surfaceheight, 16, SDL_SWSURFACE);*/
-	/*menu_screen = SDL_CreateRGBSurfaceFrom(sdl_screen, 320, 240, 16, 640, 0xF800, 0x7E0, 0x1F, 0);*/
 	sdl_screen = malloc((320*240*2 + 320*2));
 	memset(sdl_screen, 0, (320*240*2 + 320*2));
 }
@@ -107,7 +105,7 @@ void sdl_pd_clone_buffer2(void)
 static unsigned long button_states = 0;
 unsigned long sdl_joystick_read(int allow_usb_joy)
 {
-	static unsigned char button_state[12], button_time[12];
+	static unsigned char button_state[22], button_time[22];
 	
 	int i;
 	int pad;
@@ -151,6 +149,34 @@ unsigned long sdl_joystick_read(int allow_usb_joy)
 			case 11:
 			pad = isKeyPressed(KEY_NSPIRE_ESC);
 			break;
+			case 12:
+			pad = isKeyPressed(KEY_NSPIRE_1);
+			break;
+			case 13:
+			pad = isKeyPressed(KEY_NSPIRE_2);
+			break;
+			case 14:
+			pad = isKeyPressed(KEY_NSPIRE_3);
+			break;
+			case 15:
+			pad = isKeyPressed(KEY_NSPIRE_4);
+			break;
+			case 16:
+			pad = isKeyPressed(KEY_NSPIRE_5);
+			break;
+			case 17:
+			pad = isKeyPressed(KEY_NSPIRE_6);
+			break;
+			case 18:
+			pad = isKeyPressed(KEY_NSPIRE_7);
+			break;
+			case 19:
+			pad = isKeyPressed(KEY_NSPIRE_8);
+			break;
+			case 20:
+			pad = isKeyPressed(KEY_NSPIRE_9);
+			break;
+			
 		}
 		
 		switch (button_state[i])
@@ -192,6 +218,46 @@ unsigned long sdl_joystick_read(int allow_usb_joy)
 			break;
 		}
 		
+	}
+	
+	if (button_state[19] == 3)
+	{
+		button_states &= ~(GP2X_UP);
+	}
+	else if (button_state[19] > 0)
+	{
+		button_states &= ~(GP2X_UP);
+		button_states |= (GP2X_UP);
+	}
+	
+	if (button_state[17] == 3)
+	{
+		button_states &= ~(GP2X_RIGHT);
+	}
+	else if (button_state[17] > 0)
+	{
+		button_states &= ~(GP2X_RIGHT);
+		button_states |= (GP2X_RIGHT);
+	}
+	
+	if (button_state[15] == 3)
+	{
+		button_states &= ~(GP2X_LEFT);
+	}
+	else if (button_state[15] > 0)
+	{
+		button_states &= ~(GP2X_LEFT);
+		button_states |= (GP2X_LEFT);
+	}
+	
+	if (button_state[16] == 3)
+	{
+		button_states &= ~(GP2X_DOWN);
+	}
+	else if (button_state[16] > 0)
+	{
+		button_states &= ~(GP2X_DOWN);
+		button_states |= (GP2X_DOWN);
 	}
 	
 	if (button_state[0] == 3)
@@ -339,17 +405,14 @@ unsigned long sdl_joystick_read(int allow_usb_joy)
 
 
 /* misc */
-void spend_cycles(int c)
-{
-	/*usleep(c/200);*/
-}
+
 
 /* lprintf stub */
 void lprintf(const char *fmt, ...)
 {
-	va_list vl;
+	/*va_list vl;
 
 	va_start(vl, fmt);
 	vprintf(fmt, vl);
-	va_end(vl);
+	va_end(vl);*/
 }

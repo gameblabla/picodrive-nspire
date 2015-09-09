@@ -24,7 +24,7 @@ static int menu_sel_color = -1; // disabled
 // draws text to current bbp16 screen
 static void text_out16_(int x, int y, const char *text, int color)
 {
-	int i, l, u, tr, tg, tb, len;
+	/*int i, l, u, tr, tg, tb, len;
 	unsigned short *dest = (unsigned short *)SCREEN_BUFFER + x + y*SCREEN_WIDTH;
 	tr = (color & 0xf800) >> 8;
 	tg = (color & 0x07e0) >> 3;
@@ -67,25 +67,25 @@ static void text_out16_(int x, int y, const char *text, int color)
 			}
 		}
 		dest += 8;
-	}
+	}*/
 }
 
 void text_out16(int x, int y, const char *texto, ...)
 {
-	va_list args;
+	/*va_list args;
 	char    buffer[512];
 
 	va_start(args,texto);
 	vsprintf(buffer,texto,args);
 	va_end(args);
 
-	text_out16_(x,y,buffer,menu_text_color);
+	text_out16_(x,y,buffer,menu_text_color);*/
 }
 
 
 void smalltext_out16(int x, int y, const char *texto, int color)
 {
-	int i;
+	/*int i;
 	unsigned char  *src;
 	unsigned short *dst;
 
@@ -112,19 +112,19 @@ void smalltext_out16(int x, int y, const char *texto, int color)
 
 			dst += SCREEN_WIDTH-6;
 		}
-	}
+	}*/
 }
 
 void smalltext_out16_lim(int x, int y, const char *texto, int color, int max)
 {
-	char    buffer[SCREEN_WIDTH/6+1];
+	/*char    buffer[SCREEN_WIDTH/6+1];
 
 	strncpy(buffer, texto, SCREEN_WIDTH/6);
 	if (max > SCREEN_WIDTH/6) max = SCREEN_WIDTH/6;
 	if (max < 0) max = 0;
 	buffer[max] = 0;
 
-	smalltext_out16(x, y, buffer, color);
+	smalltext_out16(x, y, buffer, color);*/
 }
 
 void menu_draw_selection(int x, int y, int w)
@@ -168,7 +168,7 @@ void menu_init(void)
 	FILE *f;
 
 	// generate default font from fontdata8x8
-	memset(menu_font_data, 0, sizeof(menu_font_data));
+	/*memset(menu_font_data, 0, sizeof(menu_font_data));
 	for (c = 0; c < 256; c++)
 	{
 		for (l = 0; l < 8; l++)
@@ -184,7 +184,7 @@ void menu_init(void)
 			if (fd8x8&0x01) *fd |= 0x0f; fd++;
 		}
 		fd += 8*2/2; // 2 empty lines
-	}
+	}*/
 
 	// load custom font and selector (stored as 1st symbol in font table)
 	/*readpng(menu_font_data, "skin/font.png", READPNG_FONT);*/
@@ -192,7 +192,7 @@ void menu_init(void)
 	/*readpng(menu_font_data, "skin/selector.png", READPNG_SELECTOR);*/
 
 	// load custom colors
-	f = fopen("skin/skin.txt", "r");
+	/*f = fopen("skin/skin.txt", "r");
 	if (f != NULL)
 	{
 		lprintf("found skin.txt\n");
@@ -217,7 +217,7 @@ void menu_init(void)
 				lprintf("skin.txt: parse error: %s\n", buff);
 		}
 		fclose(f);
-	}
+	}*/
 }
 
 
@@ -269,7 +269,7 @@ menu_id me_index2id(const menu_entry *entries, int count, int index)
 
 void me_draw(const menu_entry *entries, int count, int x, int y, me_draw_custom_f *cust_draw, void *param)
 {
-	int i, y1 = y;
+	/*int i, y1 = y;
 
 	for (i = 0; i < count; i++)
 	{
@@ -287,11 +287,11 @@ void me_draw(const menu_entry *entries, int count, int x, int y, me_draw_custom_
 		else if (entries[i].beh == MB_RANGE)
 			text_out16(x + 27*8, y1, "%i", *(int *)entries[i].var);
 		y1 += 10;
-	}
+	}*/
 }
 
 int me_process(menu_entry *entries, int count, menu_id id, int is_next)
-{
+{/*
 	int i = me_id2offset(entries, count, id);
 	menu_entry *entry = &entries[i];
 	switch (entry->beh)
@@ -306,7 +306,7 @@ int me_process(menu_entry *entries, int count, menu_id id, int is_next)
 			return 1;
 		default:
 			return 0;
-	}
+	}*/
 }
 
 

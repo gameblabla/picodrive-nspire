@@ -16,10 +16,10 @@ COPT = $(COPT_COMMON) $(PROFILE)
 LDFLAGS += -lSDL -lm -lz -flto -Wl,--as-needed -Wl,--gc-sections
 
 # frontend
-OBJS += main.o menu.o emu.o sdlemu.o log_io.o gui.o n2DLib.o
+OBJS += main.o menu.o emu.o sdlemu.o gui.o n2DLib.o
 
 # common
-OBJS += platform/common/emu.o platform/common/menu.o platform/common/fonts.o
+OBJS += platform/common/emu.o platform/common/menu.o
 
 # Pico
 OBJS += Pico/Area.o Pico/Cart.o Pico/Memory.o Pico/Misc.o Pico/Pico.o Pico/Sek.o \
@@ -63,7 +63,10 @@ DIRS = bin platform platform/common platform/common/helix platform/common/helix/
 	Pico Pico/cd Pico/sound zlib unzip \
 	cpu cpu/musashi cpu/fame cpu/mz80 cpu/cz80
 
-all: mkdirs PicoDrive gen
+all: mkdirs PicoDrive gen zip
+
+zip:
+	zip -r picodrive-nspire.zip picodrive.tns README.md AUTHORS COPYING
 
 gen:
 	mv bin/PicoDrive ./pico
