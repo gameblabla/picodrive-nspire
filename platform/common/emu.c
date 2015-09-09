@@ -253,18 +253,15 @@ int emu_ReloadRom(void)
 	}*/
 
 	// load config for this ROM (do this before insert to get correct region)
-	if (!cfg_loaded) {
+	/*if (!cfg_loaded) {
 		ret = emu_ReadConfig(1, 1);
 		if (!ret) emu_ReadConfig(0, 1);
-	}
+	}*/
 
 	lprintf("PicoCartInsert(%p, %d);\n", rom_data, rom_size);
-	if(PicoCartInsert(rom_data, rom_size)) {
-		sprintf(menuErrorMsg, "Failed to load ROM.");
-		menu_romload_end();
-		return 0;
-	}
-
+	PicoCartInsert(rom_data, rom_size);
+	
+	
 	Pico.m.frame_count = 0;
 
 	// insert CD if it was detected
