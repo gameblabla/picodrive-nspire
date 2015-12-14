@@ -6,7 +6,7 @@
 #define FORMAT_FILE ".md"
 #define EXECUTABLE_NAME "picodrive.tns"
 #define DEFAULT_TEXT "   Select a Megadrive Rom file"
-#define CREDITS_TEXT "FREE TIBET ! FREE TIBET !"
+#define CREDITS_TEXT ""
 #define FILE_DELETED "File deleted !"
 
 #define CONFIRM_DELETE_FOLDER "Do you want to delete this folder ?"
