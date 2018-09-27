@@ -1,4 +1,3 @@
-=======================
 PicoDrive for Ti Nspire CX.
 =======================
 Port to TI Nspire CX by gameblabla.
