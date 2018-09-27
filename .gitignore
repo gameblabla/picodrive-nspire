@@ -1,6 +1,7 @@
 *.o 
 *.t
 *.sfc
+err.txt
 PocketSNES
 pocketsnes/snes9x/*.o
 menu/*.o
