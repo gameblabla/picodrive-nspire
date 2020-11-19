@@ -64,12 +64,12 @@ static unsigned long wait_for_input(unsigned long interesting)
 
 	for (i = 0; i < 6 && inp_prev == sdl_joystick_read(1); i++) {
 		if (i == 0) repeats++;
-		if (wait >= 30*1000) sleep(15);
+		if (wait >= 30*1000) msleep(15);
 		/*else spend_cycles(wait * currentConfig.CPUclock);*/
 	}
 
 	while ( !((ret = sdl_joystick_read(1)) & interesting) ) {
-		sleep(15);
+		msleep(15);
 		release = 1;
 	}
 
@@ -108,11 +108,11 @@ static unsigned long wait_for_input_usbjoy(unsigned long interesting, int *joy)
 	for (i = 0; i < 6; i++) {
 		ret = input2_read(interesting, joy);
 		if (*joy != inp_prevjoy || ret != inp_prev) break;
-		sleep(15);
+		msleep(15);
 	}
 
 	while ( !(ret = input2_read(interesting, joy)) ) {
-		sleep(15);
+		msleep(15);
 	}
 
 	inp_prev = ret;
@@ -938,7 +938,7 @@ static void amenu_loop_options(void)
 					if (currentConfig.gamma <   1) currentConfig.gamma =   1;
 					if (currentConfig.gamma > 300) currentConfig.gamma = 300;
 					draw_amenu_options(menu_sel);
-					sleep(15);
+					msleep(15);
 				}
 			}
 		}
@@ -962,7 +962,7 @@ menu_entry opt_entries[] =
 	/*{ "Accurate timing (slower)",  MB_ONOFF, MA_OPT_ACC_TIMING,    &currentConfig.PicoOpt, 0x040, 0, 0, 1 },
 	{ "Accurate sprites (slower)", MB_ONOFF, MA_OPT_ACC_SPRITES,   &currentConfig.PicoOpt, 0x080, 0, 0, 1 },*/
 	{ "Show FPS",                  MB_ONOFF, MA_OPT_SHOW_FPS,      &currentConfig.EmuOpt,  0x002, 0, 0, 1 },
-	/*{ NULL,                        MB_RANGE, MA_OPT_FRAMESKIP,     &currentConfig.Frameskip, 0, -1, 16, 1 },*/
+	{ "Frameskip",                 MB_RANGE, MA_OPT_FRAMESKIP,     &currentConfig.Frameskip, 0, -1, 16, 1 },
 	/*{ "Enable sound",              MB_ONOFF, MA_OPT_ENABLE_SOUND,  &currentConfig.EmuOpt,  0x004, 0, 0, 1 },
 	{ NULL,                        MB_NONE,  MA_OPT_SOUND_QUALITY, NULL, 0, 0, 0, 1 },*/
 	{ "6 button pad",              MB_ONOFF, MA_OPT_6BUTTON_PAD,   &currentConfig.PicoOpt, 0x020, 0, 0, 1 },
@@ -1187,7 +1187,7 @@ static int menu_loop_options(void)
 							 if (currentConfig.CPUclock < 300) currentConfig.CPUclock = 300;
 							  else if (currentConfig.CPUclock > 428) currentConfig.CPUclock = 428;
 							 draw_menu_options(menu_sel);
-							 sleep(15);
+							 msleep(15);
 						 }
 						 break;
 					case MA_OPT_SAVECFG:
@@ -1348,7 +1348,7 @@ static void menu_loop_root(void)
 
 	/* make sure action buttons are not pressed on entering menu */
 	draw_menu_root(menu_sel);
-	while (sdl_joystick_read(1) & (GP2X_B|GP2X_X|GP2X_SELECT)) sleep(15);
+	while (sdl_joystick_read(1) & (GP2X_B|GP2X_X|GP2X_SELECT)) msleep(15);
 
 	sdl_clear_screen();
 
@@ -1361,7 +1361,7 @@ static void menu_loop_root(void)
 		if((inp & (GP2X_L|GP2X_R)) == (GP2X_L|GP2X_R)) debug_menu_loop();
 		if(inp &(GP2X_SELECT|GP2X_X)){
 			if (rom_data) {
-				while (sdl_joystick_read(1) & (GP2X_SELECT|GP2X_X)) sleep(15); // wait until select is released
+				while (sdl_joystick_read(1) & (GP2X_SELECT|GP2X_X)) msleep(15); // wait until select is released
 				engineState = PGS_Running;
 				break;
 			}
@@ -1371,7 +1371,7 @@ static void menu_loop_root(void)
 			{
 				case MA_MAIN_RESUME_GAME:
 					if (rom_data) {
-						while (sdl_joystick_read(1) & GP2X_B) sleep(15);
+						while (sdl_joystick_read(1) & GP2X_B) msleep(15);
 						engineState = PGS_Running;
 						return;
 					}
@@ -1429,7 +1429,7 @@ static void menu_loop_root(void)
 					break;
 				case MA_MAIN_CREDITS:
 					draw_menu_credits();
-					sleep(15);
+					msleep(15);
 					inp = wait_for_input(GP2X_B|GP2X_X);
 					break;
 				case MA_MAIN_EXIT:

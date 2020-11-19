@@ -9,7 +9,7 @@ DEFINC = -I../.. -I. -D__SDL__
 GCC = nspire-gcc
 AS = nspire-gcc
 
-COPT_COMMON = -Dndlib -Os -fomit-frame-pointer -fdata-sections -ffunction-sections -marm -march=armv5te -mtune=arm926ej-s
+COPT_COMMON = -Dndlib -Ofast -fomit-frame-pointer -fdata-sections -ffunction-sections -marm -march=armv5te -mtune=arm926ej-s -flto
 COPT = $(COPT_COMMON) $(PROFILE)
 
 # libraries
@@ -85,7 +85,7 @@ tidy:
 
 PicoDrive : $(OBJS) 
 	@echo ">>>" $@
-	$(GCC) $(COPT) $^ $(LDFLAGS) -o bin/$@
+	$(GCC) $(COPT) $^ -o bin/$@ $(LDFLAGS)
 	#$(STRIP) bin/$@ -o bin/$@.dge
 
 mkdirs:

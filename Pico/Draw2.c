@@ -35,6 +35,7 @@ static int HighCache2B[41*(TILE_ROWS+1)+1+1];
 unsigned short *PicoCramHigh=Pico.cram; // pointer to CRAM buff (0x40 shorts), converted to native device color (works only with 16bit for now)
 void (*PicoPrepareCram)()=0;            // prepares PicoCramHigh for renderer to use
 
+extern uint16_t *sdl_screen;
 
 // stuff available in asm:
 #ifdef _ASM_DRAW_C
@@ -44,7 +45,6 @@ void DrawTilesFromCacheF(int *hc);
 void DrawWindowFull(int start, int end, int prio);
 void DrawSpriteFull(unsigned int *sprite);
 #else
-
 
 static int TileXnormYnorm(unsigned char *pd,int addr,unsigned char pal)
 {
@@ -144,7 +144,7 @@ static void DrawWindowFull(int start, int end, int prio)
 {
 	struct PicoVideo *pvid=&Pico.video;
 	int nametab, nametab_step, trow, tilex, blank=-1, code;
-	unsigned char *scrpos = PicoDraw2FB;
+	unsigned char *scrpos = (uint8_t*)sdl_screen;
 	int tile_start, tile_end; // in cells
 
 	// parse ranges
@@ -244,7 +244,7 @@ static void DrawLayerFull(int plane, int *hcache, int planestart, int planeend)
 	if (plane==0) nametab=(pvid->reg[2]&0x38)<< 9; // A
 	else          nametab=(pvid->reg[4]&0x07)<<12; // B
 
-	scrpos = PicoDraw2FB;
+	scrpos = (uint8_t*)sdl_screen;
 	scrpos+=8*LINE_WIDTH*(planestart-START_ROW);
 
 	// Get vertical scroll value:
@@ -322,7 +322,7 @@ static void DrawTilesFromCacheF(int *hc)
 //	unsigned short *pal;
 	unsigned char pal;
 	short blank=-1; // The tile we know is blank
-	unsigned char *scrpos = PicoDraw2FB, *pd = 0;
+	unsigned char *scrpos = (uint8_t*)sdl_screen, *pd = 0;
 
 	// *hcache++ = code|(dx<<16)|(trow<<27); // cache it
 	scrpos+=(*hc++)*LINE_WIDTH - START_ROW*LINE_WIDTH*8;
@@ -385,7 +385,7 @@ static void DrawSpriteFull(unsigned int *sprite)
 	// goto first vertically visible tile
 	while(sy <= START_ROW*8) { sy+=8; tile+=tdeltay; height--; }
 
-	scrpos = PicoDraw2FB;
+	scrpos = (uint8_t*)sdl_screen;
 	scrpos+=(sy-START_ROW*8)*LINE_WIDTH;
 
 	for (; height > 0; height--, sy+=8, tile+=tdeltay)
@@ -493,7 +493,7 @@ static void BackFillFull(int reg7)
 	back|=back<<8;
 	back|=back<<16;
 
-	memset32((int *)PicoDraw2FB, back, LINE_WIDTH*(8+(END_ROW-START_ROW)*8)/4);
+	memset32((int *)sdl_screen, back, LINE_WIDTH*(8+(END_ROW-START_ROW)*8)/4);
 }
 #endif
 

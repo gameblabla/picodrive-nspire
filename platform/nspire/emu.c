@@ -41,9 +41,8 @@ static struct timeval noticeMsgTime = { 0, 0 }; // when started showing
 static int osd_fps_x;
 static int combo_keys = 0, combo_acts = 0; // keys and actions which need button combos
 
-char noticeMsg[64];  // notice msg to draw
+extern char noticeMsg[64];  // notice msg to draw
 //unsigned char *PicoDraw2FB = NULL;  // temporary buffer for alt renderer
-unsigned char PicoDraw2FB[(8+320)*(8+240+8)];
 int reset_timing = 0;
 
 static void emu_msg_cb(const char *msg);
@@ -366,7 +365,7 @@ static void RunEvents(unsigned int which)
 			unsigned long keys = 0;
 			blit("", (which & 0x1000) ? "LOAD STATE? (X=yes, B=no)" : "OVERWRITE SAVE? (X=yes, B=no)");
 			while( !((keys = sdl_joystick_read(1)) & (GP2X_X|GP2X_Y)) )
-				sleep(15);
+				msleep(15);
 			if (keys & GP2X_X) do_it = 0;
 			clearArea(0);
 		}

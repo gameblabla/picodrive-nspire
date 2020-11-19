@@ -11,6 +11,7 @@
 #ifndef __SDLEMU_H__
 #define __SDLEMU_H__
 
+#include <stdint.h>
 
 void sdl_init(void);
 void sdl_deinit(void);
@@ -35,7 +36,7 @@ void sdl_sound_volume(int l, int r);
 /* joy */
 unsigned long sdl_joystick_read(int allow_usb_joy);
 
-extern void *sdl_screen;
+extern uint16_t *sdl_screen;
 extern int sdl_video_scaling;
 
 enum  { GP2X_UP=1<<6,      GP2X_LEFT=1<<5,      GP2X_DOWN=1<<27, GP2X_RIGHT=1<<18,

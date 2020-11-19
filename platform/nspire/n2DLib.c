@@ -12,6 +12,15 @@ extern "C" {
 
 uint16_t *BUFF_BASE_ADDRESS;
 
+static void wait_for_vsync()
+{
+    // Clear sync flag
+    *(volatile uint32_t*)(0xC0000028) = 0b100;
+    // Wait for sync flag set
+    while((*(volatile uint32_t*)(0xC0000020) & 0b100) == 0)
+        idle();
+}
+
 void initBuffering()
 {
 	uint8_t init_scr;
@@ -34,6 +43,7 @@ void initBuffering()
 void updateScreen()
 {
 	lcd_blit(BUFF_BASE_ADDRESS, SCR_320x240_565);
+	wait_for_vsync();
 }
 
 void deinitBuffering()

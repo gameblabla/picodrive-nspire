@@ -17,27 +17,19 @@
 
 #include "sdlemu.h"
 
-void *sdl_screen; // working buffer 320*230*2 + 320*2
+uint16_t *sdl_screen; // working buffer 320*230*2 + 320*2
 static int current_bpp = 16;
 
 void sdl_video_flip_320(void);
 
 void sdl_init(void)
 {
-	struct {
-		int x;
-		int y;
-		void (*p)(void);
-	} vm[1] = {
-			{320, 240, sdl_video_flip_320},
-	};
-
 	initBuffering();
 	clearBufferB();
 	updateScreen();
 
-	sdl_screen = malloc((320*240*2 + 320*2));
-	memset(sdl_screen, 0, (320*240*2 + 320*2));
+	sdl_screen = BUFF_BASE_ADDRESS;
+	memset(sdl_screen, 0, (320*240)*2);
 }
 
 void sdl_deinit(void)
@@ -49,14 +41,14 @@ void sdl_deinit(void)
 /* video */
 void sdl_video_flip_320(void)
 {
-	int i;
+	/*int i;
 	unsigned short *fbp = (unsigned short *)BUFF_BASE_ADDRESS;
 	unsigned short *pixels = sdl_screen;
 
 	for (i =(320*240); i--;) 
 	{
 		*fbp++ = *pixels++;
-	}
+	}*/
 }
 
 void sdl_video_flip(void)
@@ -99,7 +91,7 @@ void sdl_memset_all_buffers(int offset, int byte, int len)
 
 void sdl_pd_clone_buffer2(void)
 {
-	memset(sdl_screen, 0, 320*240*2);
+	memset(sdl_screen, 0, (320*240)*2);
 }
 
 static unsigned long button_states = 0;
