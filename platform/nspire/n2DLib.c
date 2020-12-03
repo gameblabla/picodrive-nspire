@@ -35,6 +35,7 @@ void initBuffering()
 	init_scr = lcd_init(SCR_320x240_565);
 	if (init_scr == 0)
 	{
+		free(BUFF_BASE_ADDRESS);
 		lcd_init(SCR_TYPE_INVALID);
 		exit(0);
 	}

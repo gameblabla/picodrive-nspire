@@ -35,7 +35,6 @@ void sdl_init(void)
 void sdl_deinit(void)
 {
 	deinitBuffering();
-	if (sdl_screen) free(sdl_screen);
 }
 
 /* video */
